@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.form.www.mybatis.mapper.AdminMapper" >
+  <resultMap id="BaseResultMap" type="com.form.www.entity.Admin" >
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <id column="admin_name" property="adminName" jdbcType="VARCHAR" />
+    <result column="pwd" property="pwd" jdbcType="VARCHAR" />
+    <result column="gender" property="gender" jdbcType="INTEGER" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="remark" property="remark" jdbcType="VARCHAR" />
+  </resultMap>
+  
+  <select id="selectPageByAdmin" parameterType="com.form.www.entity.Admin" resultMap="BaseResultMap">
+  		select * from admin 
+  		<where>
+  			<if test="adminName != null and adminName != ''">
+  				and adminName like concat(concat("%",#{admin.adminName}),"%")
+  			</if>
+  			<if test="name != null and name != ''">
+  				and name like concat(concat("%",#{admin.name}),"%")
+  			</if>
+  			<if test="gender != null and gender != ''">
+  				and gender = #{gender}
+  			</if>
+  			
+  		</where>
+  </select>
+</mapper>
